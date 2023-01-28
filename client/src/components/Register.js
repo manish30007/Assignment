@@ -25,8 +25,7 @@ const Register = () => {
       alert("password not match");
     } else {
       console.log("data ", data);
-      axios
-        .post("https://jsonplaceholder.typicode.com/posts", data)
+      axios.post("http://localhost:8000/api/employee", data)
         .then((res) => {
           setData({ mobile: "", email: "", gstin: "",
           bank_account: "",

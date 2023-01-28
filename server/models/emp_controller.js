@@ -1,8 +1,8 @@
 const neo4j = require('neo4j-driver');
 var uuid = require('uuid');
-const uri = 'neo4j+s://a4bf3054.databases.neo4j.io';
+const uri = 'neo4j+s://74f312f9.databases.neo4j.io';
 const user = 'neo4j';
-const password = 'L-0cLNXtJqkoMg4xs3o2Qs1ueLllsTWjWFkCi8UzcKM';
+const password = 'yH4eXXjRiPoR3IP3WpOikyQljxnzcYnQUmxloDJpvRw';
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
     const session = driver.session({ database: 'neo4j' });
 
@@ -18,7 +18,7 @@ const findById = async (id) =>{
 const create = async (user) =>{
     console.log(uuid.v1);
     const unique_id = uuid.v1();
-    await session.run(`CREATE (u:User {_id : '${unique_id}', name: '${user.name}',mobile:'${user.mobile}', email: '${user.email}',gstin: '${user.gstin}',bank_account: '${user.bank_account}',bank_ifsc: '${user.ifsc}',password: '${user.password}',} ) return u`)
+    await session.run(`CREATE (u:User {_id : '${unique_id}', name: '${user.name}',mobile:'${user.mobile}', email: '${user.email}',gstin: '${user.gstin}',bank_account: '${user.bank_account}',bank_ifsc: '${user.ifsc}',password: '${user.password}',confirmpassword:'${user.confirmpassword}'} ) return u`)
     return await findById(unique_id)
 }
 const findByIdAndUpdate = async (id, user) =>{
