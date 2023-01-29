@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useStore } from "../store";
-
+import { useToaster,Message} from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 import "./AddListing.css";
+import { useNavigate} from "react-router-dom";
 const AddListing = () => {
+  const toaster = useToaster();
+  let navigate = useNavigate();
+
   const currentId = useStore((state) => state.currentId);
   
   var [pssi, setPssi] = useState({
+    file:"",
     productcategory: "",
     sellingprice: "",
     stock: "",
@@ -19,8 +25,12 @@ const AddListing = () => {
   const handlechange = async (e) => {
     e.preventDefault();
     setPssi({ ...pssi, [e.target.name]: e.target.value });
-    // console.log(pssi);
+    console.log(pssi);
   };
+  function handleImage(e){
+setPssi({...pssi,[e.target.name]:e.target.files[0]})
+console.log(pssi);
+  }
 
   
   const handleClick = (e) => {
@@ -35,6 +45,7 @@ const AddListing = () => {
       .post("http://localhost:8000/api/product", result)
       .then((res) => {
         setPssi({
+          file:"",
           productcategory: "",
           sellingprice: "",
           stock: "",
@@ -44,37 +55,36 @@ const AddListing = () => {
           description: "",
           searchkeyword: "",
         });
+        toaster.push(
+          <Message type="success" closable>
+           Product Added successfully
+          </Message>
+        );
         console.log(" product added successfully ");
+        navigate("/listing")
       })
       .catch((err) => {
         console.log("Error couldn't create pro");
+        <Message type="error" closable>
+          error product not added
+         </Message>
         console.log(err.response.message);
       });
   };
   return (
     <>
+    
       <div className="container">
-        <div className="row row-cols-2">
-          {/* product images */}
-          <div className="col">
-            <div className="card text-center" style={{ height: "85vh" }}>
-              <div className="card-header">Add images</div>
-              <div className="card-body" style={{ textAlign: "center" }}>
-                <a href="" className="btn btn-primary">
-                  browse
-                </a>
-              </div>
-              <div className="card-footer text-muted"></div>
-            </div>
-          </div>
+        
+         
 
           {/* product details */}
-          <div className="col">
+          <div className="" style={{marginLeft:"20%",marginRight:"20%"}}>
             <div
               className="card"
-              style={{ height: "85vh", overflow: "scroll" }}
+              style={{ width:"600px"}}
             >
-              <div className="card-header"></div>
+              <div className="card-header">Add Product Details</div>
               <div className="card-body">
                 <div className="container">
                   <form>
@@ -218,7 +228,7 @@ const AddListing = () => {
                       className="btn btn-primary"
                       onClick={handleClick}
                     >
-                      Register
+                      Add Product
                     </button>
                   </form>
                 </div>
@@ -226,7 +236,6 @@ const AddListing = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

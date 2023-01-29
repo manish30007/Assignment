@@ -1,11 +1,11 @@
 const Pro = require("../models/prod_controller");
 
 exports.getAllProduct = (req, res) => {
-  const token=req.header("auth-token");
-  console.log('token',token);
+  const token=req.header("token");
+//   console.log('tokennnnnn',token);
     Pro.findAll(token)
         .then((pro) => {
-            console.log({ pro });
+            // console.log({ pro });
             res.json(pro);
         })
         .catch((err) =>
@@ -15,8 +15,9 @@ exports.getAllProduct = (req, res) => {
         );
 };
 
+
 exports.postCreateProduct = (req, res) => {
-    // console.log("ghjk",req.body);
+    console.log("ghjk",req.body);
     Pro.create(req.body)
         .then((data) => {
             console.log('test')
@@ -33,8 +34,8 @@ exports.postCreateProduct = (req, res) => {
 
 exports.putUpdateProduct = (req, res) => {
     console.log("id: ", req.params.id);
-    console.log("body: ", req.body);
-    Pro.findByIdAndUpdate(req.params.id, req.body)
+    // console.log("body: ", req.body);
+    Pro.findByIdAndUpdate(req.params.id,req.body)
         .then((emp) => {
             console.log("edit", { emp });
             return res.json({ message: "updated successfully", emp });
@@ -47,18 +48,14 @@ exports.putUpdateProduct = (req, res) => {
 };
 
 exports.deleteProduct = (req, res) => {
-    Pro.findByIdAndDelete(req.params.id, req.body).then((data) =>
-        res
-            .json({ message: "emp deleted successfully", data })
-            .catch((err) =>
-                res
-                    .status(404)
-                    .json({ error: "book not found", message: err.message })
-            )
+    const token=req.header("token");
+  console.log('token',token,req.params.id);
+    Pro.findByIdAndDelete(req.params.id, token)
+    .then((data) =>
+        res.json({ message: "emp deleted successfully", data })
     )
     .catch((err) =>
-            res
-                .status(400)
-                .json({ error: "unable to delete emp", message: err.message })
+            res.status(400)
+            .json({ error: "unable to delete emp", message: err.message })
         );
 };

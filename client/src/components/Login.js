@@ -4,6 +4,7 @@ import { useNavigate} from "react-router-dom";
 import { useStore } from "../store";
 import { useToaster,Message} from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+
 const Login = () => {
   const toaster = useToaster();
   let navigate = useNavigate();
@@ -40,10 +41,8 @@ const Login = () => {
         })
 
         .catch((err) => {
-          console.log("Error couldn't login");
-          <Message type="error" closable>
-          error login
-         </Message>
+         alert('invalid credentials')
+            console.log("Error couldn't login");
           console.log(err.response.data);
         });
     }
@@ -68,9 +67,7 @@ const Login = () => {
     <label htmlFor='password' className="form-label">Password</label>
     <input name="password" type="password" className="form-control" id="password"  value={logindata.password} onChange={onChange}/>
   </div>
-  <div class="mb-1" style={{fontSize:".84rem"}}>
-  <label for="exampleInputEmail1" class="form-label">By continuing, I agree to Sellers's Terms of Use & Privacy Policy      
-  </label></div>
+  
   <button type="submit" className="btn btn-primary">Login</button>
 </form>
 </div>  

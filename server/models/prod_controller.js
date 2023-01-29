@@ -9,7 +9,7 @@ const session = driver.session({ database: 'neo4j' });
 
     const findAll = async (id) =>{
      
-     console.log('id for cyfer',id);
+    //  console.log('id for cyfer',id);
     const result = await session.run(`MATCH (u:User {_id:'${id}'})-[:sells]->(p:Product)
     RETURN p`) 
     return await result.records.map(i=>i.get('p').properties)
@@ -36,6 +36,7 @@ const create = async (arr) =>{
     await session.run(`CREATE (p:Product {
        
         _id : '${product_unique_id}',
+
         productcategory:'${prod.productcategory}',
         productname:'${prod.productname}',
         sellingprice:'${prod.sellingprice}',
@@ -48,13 +49,28 @@ const create = async (arr) =>{
    CREATE (u)-[:sells]->(p)`)
     return await findById(product_unique_id)
 }
-const findByIdAndUpdate = async (id, user) =>{
-    const result = await session.run(`MATCH (u:User {_id : '${id}'}) SET u.title= '${user.title}', u.description= '${user.description}' return u`)
-    return result.records[0].get('u').properties
+const findByIdAndUpdate = async (id, prod) =>{
+    console.log(prod)
+    const result = await session.run(`MATCH (p:Product {_id : '${id}'}) SET  
+    p.productcategory:'${prod.e_productcategory}',
+    p.productname:'${prod.e_productname}',
+    p.sellingprice:'${prod.e_sellingprice}',
+    p.stock:'${prod.e_stock}',
+    p.packof:'${prod.e_packof}',
+    p.delivercharge:'${prod.e_delivercharge}',
+    p.description:'${prod.e_description}',
+    p.searchkeyword:'${prod.e_searchkeyword}' return p`)
+    return result.records[0].get('p').properties
 }
-const findByIdAndDelete = async (id) =>{
-    await session.run(`MATCH (u:User {_id : '${id}'}) DELETE u`)
-    return await findAll()
+const findByIdAndDelete = async (id,token) =>{
+    console.log('33',token)
+    await session.run(`MATCH (p:Product {_id : '${id}'}) DETACH DELETE p`)
+    .then((data)=>{
+    console.log("ggggggggggggg")
+    })
+    .catch((err)=>{
+              console.log(err.response)
+    }) 
 }
 module.exports ={
     findAll,

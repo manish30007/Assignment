@@ -27,7 +27,7 @@ function App() {
       <Route exact path = "/login"  element={<><Header/><Login /></>}>
       
       </Route>
-      <Route exact path = "/listing"  element={<><Header/><Listing /></>}>
+      <Route exact path = "/listing"  element={<><HomeNav/><Listing /></>}>
       
       </Route>
         </Routes>

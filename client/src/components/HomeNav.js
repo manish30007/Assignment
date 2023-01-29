@@ -1,17 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useStore } from '../store';
+import { useNavigate} from "react-router-dom";
+
 const HomeNav = () => {
+  const navigate=useNavigate();
+  const { setCurrentName, setCurrentEmail, setCurrentId} = useStore();
+  const handlelogout=()=>{
+    setCurrentName(null);
+          setCurrentEmail(null);
+          setCurrentId(null);
+          navigate("/")
+  }
   const currentName = useStore((state) => state.currentName);
   return (
     <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <Link class="navbar-brand" to="/home ">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/home ">
        Sellers
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -19,19 +29,19 @@ const HomeNav = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">
              Home
               </a>
             </li>
             
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -40,30 +50,30 @@ const HomeNav = () => {
               >
                 Listings
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <Link class="dropdown-item" to="/listing">
+                  <Link className="dropdown-item" to="/listing">
                     My Listing
                   </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                <Link className="dropdown-item" to="/home">
                     Add Listing
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Opportunities
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -72,28 +82,28 @@ const HomeNav = () => {
               >
                 Orders
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Active Order
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                    Return 
                   </a>
                 </li>
                
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Cancellation
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -102,30 +112,30 @@ const HomeNav = () => {
               >
                 Payment
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Payment Overview
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Previous Payment
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                   
                   </a>
                 </li>
               </ul>
             </li>
-            {/* <li class="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -134,22 +144,22 @@ const HomeNav = () => {
               >
                 Services
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Another action
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Something else here
                   </a>
                 </li>
@@ -160,13 +170,13 @@ const HomeNav = () => {
             
             <div className="mx-3 my-1" style={{}}>
             {/* <a>
-            <button class="btn btn-outline-primary" type="submit">
+            <button className="btn btn-outline-primary" type="submit">
            Log Out
             </button>
             </a>  */}
-             <div class="nav-item dropdown ">
+             <div className="nav-item dropdown ">
               <a
-                class="nav-link dropdown-toggle "
+                className="nav-link dropdown-toggle "
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -175,16 +185,16 @@ const HomeNav = () => {
               >
                 {currentName}
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
-                   Profile
-                  </a>
+                <Link className="dropdown-item" to="/listing">
+                   Listing
+                  </Link>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={handlelogout}>
                     Logout
-                  </a>
+                  </button>
                 </li>
                 
                 

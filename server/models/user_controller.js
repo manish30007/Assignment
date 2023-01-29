@@ -6,10 +6,10 @@ const password = 'yH4eXXjRiPoR3IP3WpOikyQljxnzcYnQUmxloDJpvRw';
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
     const session = driver.session({ database: 'neo4j' });
 
-const findAll = async () =>{
-    const result = await session.run(`Match (u:User) return u`)
-    return result.records.map(i=>i.get('u').properties)
-}
+// const findAll = async () =>{
+//     const result = await session.run(`Match (u:User) return u`)
+//     return result.records.map(i=>i.get('u').properties)
+// }
 
 const findById = async (id) =>{
     const result = await session.run(`MATCH (u:User {_id : '${id}'} ) return u limit 1`)
@@ -28,20 +28,20 @@ const login= async (user) =>{
     console.log("result",result)
     return result.records[0].get('u').properties
 }
-const findByIdAndUpdate = async (id, user) =>{
-    const result = await session.run(`MATCH (u:User {_id : '${id}'}) SET u.title= '${user.title}', u.description= '${user.description}' return u`)
-    return result.records[0].get('u').properties
-}
-const findByIdAndDelete = async (id) =>{
-    await session.run(`MATCH (u:User {_id : '${id}'}) DELETE u`)
-    return await findAll()
-}
+// const findByIdAndUpdate = async (id, user) =>{
+//     const result = await session.run(`MATCH (u:User {_id : '${id}'}) SET u.title= '${user.title}', u.description= '${user.description}' return u`)
+//     return result.records[0].get('u').properties
+// }
+// const findByIdAndDelete = async (id) =>{
+//     await session.run(`MATCH (u:User {_id : '${id}'}) DELETE u`)
+//     return await findAll()
+// }
 
 module.exports ={
-    findAll,
+    // findAll,
     findById,
     create,
     login,
-    findByIdAndUpdate,
-    findByIdAndDelete
+    // findByIdAndUpdate,
+    // findByIdAndDelete
 }
