@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useStore } from "../store";
+
 import "./AddListing.css";
 const AddListing = () => {
+  const currentId = useStore((state) => state.currentId);
+  
   var [pssi, setPssi] = useState({
     productcategory: "",
     sellingprice: "",
@@ -22,8 +26,13 @@ const AddListing = () => {
   const handleClick = (e) => {
     e.preventDefault();
     // console.log("product ", pssi);
+     const result  = {
+      pssi,
+      currentId
+    };
+    //  console.log(result);
     axios
-      .post("http://localhost:8000/api/product", pssi)
+      .post("http://localhost:8000/api/product", result)
       .then((res) => {
         setPssi({
           productcategory: "",

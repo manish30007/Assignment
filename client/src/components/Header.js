@@ -1,13 +1,13 @@
 import React from "react";
-
+import {Link} from 'react-router-dom'
 const Header = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
          Sellers
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -74,17 +74,17 @@ const Header = () => {
                 </a>
               </li>
             </ul>
-              <div className="mx-1 my-1">
+              {/* <div className="mx-1 my-1">
             <a> <button className="btn btn-outline-success" type="submit">
              Start Selling 
               </button></a> 
-              </div>
+              </div> */}
               <div className="mx-1 my-1">
-              <a>
+              <Link to="/login">
               <button className="btn btn-outline-primary" type="submit">
              Login
               </button>
-              </a> 
+              </Link> 
               </div>
 
 

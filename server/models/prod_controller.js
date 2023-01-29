@@ -1,3 +1,4 @@
+// import store from '../../client/src/store'
 const neo4j = require('neo4j-driver');
 var uuid = require('uuid');
 const uri = 'neo4j+s://74f312f9.databases.neo4j.io';
@@ -6,9 +7,13 @@ const password = 'yH4eXXjRiPoR3IP3WpOikyQljxnzcYnQUmxloDJpvRw';
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
 const session = driver.session({ database: 'neo4j' });
 
-    const findAll = async () =>{
-    const result = await session.run(`Match (u:User) return u`)
-    return result.records.map(i=>i.get('u').properties)
+    const findAll = async (id) =>{
+     
+     console.log('id for cyfer',id);
+    const result = await session.run(`MATCH (u:User {_id:'${id}'})-[:sells]->(p:Product)
+    RETURN p`) 
+    return await result.records.map(i=>i.get('p').properties)
+
 }
 
     const findById = async (id) =>{
@@ -17,7 +22,13 @@ const session = driver.session({ database: 'neo4j' });
 )
     return result.records[0].get('p').properties
 }
-const create = async (prod) =>{
+const create = async (arr) =>{
+
+    const prod = arr.pssi;
+    const token = arr.currentId;
+    console.log(prod,token);
+    // const token1=sessionStorage.getItem('user-storage');
+    // console.log(token1);
     console.log(uuid.v1);
     // console.log('hi ',prod);
     const product_unique_id = uuid.v1();
@@ -33,7 +44,8 @@ const create = async (prod) =>{
         delivercharge:'${prod.delivercharge}',
         description:'${prod.description}',
         searchkeyword:'${prod.searchkeyword}'} ) return p`)
-   
+   await session.run(`MATCH (u:User {_id:'${token}'}), (p:Product {_id:'${product_unique_id}'})
+   CREATE (u)-[:sells]->(p)`)
     return await findById(product_unique_id)
 }
 const findByIdAndUpdate = async (id, user) =>{

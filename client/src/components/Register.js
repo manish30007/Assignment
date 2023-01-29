@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useNavigate} from "react-router-dom";
 import "./register.css";
+import { useToaster,Message} from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 import axios from "axios";
+
+import { Router } from "react-router-dom";
 const Register = () => {
+  const toaster = useToaster();
   const [d1, setd1] = useState("");
   const [d2, setd2] = useState("d-none");
   const [data, setData] = useState({
@@ -14,11 +20,13 @@ const Register = () => {
     password: "",
     confirmpassword: "",
   });
-
+  let navigate = useNavigate();
   const onchange = (e) => {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
-    console.log(data);
+    // console.log(data);
   };
+
+
   const handleClick = (e) => {
     e.preventDefault();
     if (data.password != data.confirmpassword) {
@@ -32,10 +40,21 @@ const Register = () => {
           bank_ifsc: "",
           password: "",
           confirmpassword: ""});
+          toaster.push(
+            <Message type="success" closable>
+              Vendor Registration successfully
+            </Message>
+          );
+          navigate("/login")
           console.log(res.data.message, " mess printed ");
         })
         .catch((err) => {
           console.log("Error couldn't create Emp");
+          toaster.push(
+            <Message type="error" closable>
+              Error Couldn't create vendor
+            </Message>
+          );
           console.log(err.message);
         });
     }
@@ -46,16 +65,16 @@ const Register = () => {
   // }
   return (
     <div className="container d-flex reg">
-      <div className="regform" style={{ position: "relative", width: "50%" }}>
+      <div class="regform" style={{ position: "relative", width: "50%" }}>
         <form>
           <div className="d-flex">
             {/* name of seller */}
-            <div className="mb-3 " style={{ width: "80%" }}>
+            <div class="mb-3 " style={{ width: "80%" }}>
               <input
                 style={{ fontSize: ".95rem" }}
                 name="name"
                 type="text"
-                className="form-control"
+                class="form-control"
                 id="exampleInputEmail1"
                 value={data.name}
                 onChange={onchange}
@@ -63,12 +82,12 @@ const Register = () => {
               />
             </div>
             {/* mobile no of seller */}
-            <div className="mb-3 " style={{ width: "80%" }}>
+            <div class="mb-3 " style={{ width: "80%" }}>
               <input
                 style={{ fontSize: ".95rem" }}
                 name="mobile"
                 type="text"
-                className="form-control"
+                class="form-control"
                 id="exampleInputEmail1"
                 value={data.mobile}
                 onChange={onchange}
@@ -78,12 +97,12 @@ const Register = () => {
             </div>
           </div>
           {/* email of seller */}
-          <div className="mb-3">
+          <div class="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               name="email"
               type="email"
-              className="form-control"
+              class="form-control"
               id="exampleInputEmail1"
               value={data.email}
               onChange={onchange}
@@ -93,11 +112,11 @@ const Register = () => {
           </div>
 
           {/* gst no of seller */}
-          <div className={`mb-3 ${d1}`}>
+          <div class={`mb-3 ${d1}`}>
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
-              className="form-control"
+              class="form-control"
               id="exampleInputEmail1"
               name="gstin"
               value={data.gstin}
@@ -106,19 +125,19 @@ const Register = () => {
               aria-describedby="emailHelp"
             />
             <div style={{ fontSize: ".8rem" }}>
-              <label for="exampleInputEmail1" className="form-label">
+              <label for="exampleInputEmail1" class="form-label">
                 {" "}
                 GSTIN is required to sell products on Sellers
               </label>
             </div>
           </div>
           {/* bank account no of seller */}
-          <div className="mb-3">
+          <div class="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
               name="bank_account"
-              className="form-control"
+              class="form-control"
               id="exampleInputEmail1"
               value={data.bank_account}
               onChange={onchange}
@@ -127,12 +146,12 @@ const Register = () => {
             />
           </div>
           {/* bank ifsc code of seller */}
-          <div className="mb-3">
+          <div class="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
               name="bank_ifsc"
-              className="form-control"
+              class="form-control"
               id="exampleInputEmail1"
               value={data.bank_ifsc}
               onChange={onchange}
@@ -140,41 +159,41 @@ const Register = () => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-1" style={{ fontSize: ".84rem" }}>
-            <label for="exampleInputEmail1" className="form-label">
+          <div class="mb-1" style={{ fontSize: ".84rem" }}>
+            <label for="exampleInputEmail1" class="form-label">
               By continuing, I agree to Sellers's Terms of Use & Privacy Policy
             </label>
           </div>
 
           <button
             type="button"
-            className="btn btn-primary"
+            class="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
             Register to Continue
           </button>
           <div
-            className="modal fade"
+            class="modal fade"
             id="exampleModal"
-            tabIndex="-1"
+            tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
                     Create Password
                   </h5>
                   <button
                     type="button"
-                    className="btn-close"
+                    class="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div class="modal-body">
                   <div>
                     <div className="container my-3">
                       {/* password creation of seller */}
@@ -206,7 +225,7 @@ const Register = () => {
                           onChange={onchange}
                         />
                       </div>
-                      <div className="mb-1" style={{ fontSize: ".84rem" }}></div>
+                      <div class="mb-1" style={{ fontSize: ".84rem" }}></div>
 
                       {/* final register by seller */}
 
@@ -220,7 +239,7 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-                <div className="modal-footer"></div>
+                <div class="modal-footer"></div>
               </div>
             </div>
           </div>
@@ -228,10 +247,10 @@ const Register = () => {
       </div>
       <div></div>
       <div>
-        <div className="card mx-2 my-3" style={{ width: "350px" }}>
-          <img src="/images/img1.jpg" className="card-img-top" alt="..." />
-          <div className="card-body">
-            <p className="card-text">Sell Online and Grow...</p>
+        <div class="card mx-2 my-3" style={{ width: "350px" }}>
+          <img src="/images/img1.jpg" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <p class="card-text">Sell Online and Grow...</p>
           </div>
         </div>
       </div>

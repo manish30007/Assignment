@@ -1,15 +1,17 @@
 const Pro = require("../models/prod_controller");
 
 exports.getAllProduct = (req, res) => {
-    Pro.findAll()
-        .then((emp) => {
-            console.log({ emp });
-            res.json(emp);
+  const token=req.header("auth-token");
+  console.log('token',token);
+    Pro.findAll(token)
+        .then((pro) => {
+            console.log({ pro });
+            res.json(pro);
         })
         .catch((err) =>
             res
                 .status(404)
-                .json({ message: "no emp found", error: err.message })
+                .json({ message: "no pro found", error: err.message })
         );
 };
 
@@ -17,9 +19,9 @@ exports.postCreateProduct = (req, res) => {
     // console.log("ghjk",req.body);
     Pro.create(req.body)
         .then((data) => {
-            
+            console.log('test')
            res.json({ message: "pro added successfully", data });
-           console.log('test')
+           
         })
         .catch((err) =>
             res.status(400).json({
