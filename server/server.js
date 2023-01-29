@@ -8,6 +8,7 @@ const app = express();
 connectDB();
 // routes
 const emproute = require('./routes/emproute');
+const productroute = require('./routes/productroute');
 // connect database
 
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => res.send('server is active'));
 
 // use routes
 app.use("/api/employee", emproute);
-
+app.use("/api/product",productroute)
 // setting up port
 
 const PORT = process.env.PORT || 8000;

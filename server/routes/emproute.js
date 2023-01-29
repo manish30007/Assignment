@@ -13,6 +13,7 @@ router.get("/", getAllEmp);
 
 router.post("/", postCreateEmp);
 
+
 router.put("/:id", putUpdateEmp);
 
 router.delete("/:id", deleteEmp);

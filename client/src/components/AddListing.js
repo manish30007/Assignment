@@ -1,95 +1,225 @@
-import React from 'react'
-import Add1 from './Add1'
-// import Add2 from './Add2'
-// import Add3 from './Add3'
-import "./AddListing.css"
+import React, { useState } from "react";
+import axios from "axios";
+import "./AddListing.css";
 const AddListing = () => {
-    const list={
-     sellersku:"",
-     listingstatus:"",
-     mrp:"",
-     sellingprice:"",
-     fullfilmentby:"",
-     procurement:"",
-     stock:"",
-     localdelivercharge:"",
-     zonaldelivercharge:"",
-     nationaldelivercharge:"",
-     packerweight:"",
-     packetlength:"",
-     packetheight:"",
-     hsn:"",
-     taxcode:"",
-     countryoforigin:"",
-     modalname:"",
-     modalnumber:"",
-     capacity:"",
-     brandcolor:"",
-     type:"",
-     packof:"",
-     bodymaterial:"",
-     color:"",
-     searchkeyword:"",
-     keyfeatures:"",
-     warranty:""
-    }
-   const handlesubmit1=( sellersku,
-   listingstatus,
-   mrp,
-   sellingprice,
-   fullfilmentby,
-   procurement,
-   stock,
-   localdelivercharge,
-   zonaldelivercharge,
-   nationaldelivercharge,
-   packerweight,
-   packetlength,
-   packetheight,
-   hsn,
-   taxcode,
-   countryoforigin)=>{
+  var [pssi, setPssi] = useState({
+    productcategory: "",
+    sellingprice: "",
+    stock: "",
+    delivercharge: "",
+    productname: "",
+    packof: "",
+    description: "",
+    searchkeyword: "",
+  });
+  const handlechange = async (e) => {
+    e.preventDefault();
+    setPssi({ ...pssi, [e.target.name]: e.target.value });
+    // console.log(pssi);
+  };
 
-   
-   }
-   const handlesubmit2=()=>{}
-   const handlesubmit3=()=>{}
+  
+  const handleClick = (e) => {
+    e.preventDefault();
+    // console.log("product ", pssi);
+    axios
+      .post("http://localhost:8000/api/product", pssi)
+      .then((res) => {
+        setPssi({
+          productcategory: "",
+          sellingprice: "",
+          stock: "",
+          delivercharge: "",
+          productname: "",
+          packof: "",
+          description: "",
+          searchkeyword: "",
+        });
+        console.log(" product added successfully ");
+      })
+      .catch((err) => {
+        console.log("Error couldn't create pro");
+        console.log(err.response.message);
+      });
+  };
   return (
-  <>
-  <div class="container">
-  <div class="row row-cols-2">
-    <div class="col">
-    <div class="card text-center" style={{height:'85vh'}}>
-  <div class="card-header">
-    Add images
-  </div>
-  <div class="card-body" style={{textAlign:'center'}}>
-    
-    <a href="#" class="btn btn-primary">browse</a>
-  </div>
-  <div class="card-footer text-muted">
-    
-  </div>
-</div>
-    </div>
-    <div class="col">
-    <div class="card" style={{height:'85vh',overflow:'scroll'}} >
-  <div class="card-header">
-  </div>
-  <div class="card-body">
-  <Add1 list={list} handlesubmit1={handlesubmit1}/>
-  {/* <Add2 list={list} handlesubmit2={handlesubmit2}/> */}
-  {/* <Add3 list={list} handlesubmit3={handlesubmit3}/> */}
-  </div>
-</div>
-  
-    </div>
-   
-  </div>
-</div>
-  
-  </>
-  )
-}
+    <>
+      <div className="container">
+        <div className="row row-cols-2">
+          {/* product images */}
+          <div className="col">
+            <div className="card text-center" style={{ height: "85vh" }}>
+              <div className="card-header">Add images</div>
+              <div className="card-body" style={{ textAlign: "center" }}>
+                <a href="" className="btn btn-primary">
+                  browse
+                </a>
+              </div>
+              <div className="card-footer text-muted"></div>
+            </div>
+          </div>
 
-export default AddListing
+          {/* product details */}
+          <div className="col">
+            <div
+              className="card"
+              style={{ height: "85vh", overflow: "scroll" }}
+            >
+              <div className="card-header"></div>
+              <div className="card-body">
+                <div className="container">
+                  <form>
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Product Name*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="productname"
+                        className="form-control"
+                        id="productname"
+                        value={pssi.productname}
+                        onChange={handlechange}
+                        placeholder=""
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Product Category*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="productcategory"
+                        className="form-control"
+                        id="productcategory"
+                        value={pssi.productcategory}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Price*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="sellingprice"
+                        className="form-control"
+                        id="sellingprice"
+                        value={pssi.sellingprice}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Stock*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="stock"
+                        className="form-control"
+                        id="stock"
+                        value={pssi.stock}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Delivercharge*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="delivercharge"
+                        className="form-control"
+                        id="delivercharge"
+                        value={pssi.delivercharge}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Pack of*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="packof"
+                        className="form-control"
+                        id="packof"
+                        value={pssi.packof}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Description*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="description"
+                        className="form-control"
+                        id="description"
+                        value={pssi.description}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="col-md-4 setwidth control-label">
+                        Search Keywords*
+                      </label>
+                      <input
+                        style={{ fontSize: ".95rem" }}
+                        type="text"
+                        name="searchkeyword"
+                        className="form-control"
+                        id="searchkeyword"
+                        value={pssi.searchkeyword}
+                        onChange={handlechange}
+                        placeholder=""
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      onClick={handleClick}
+                    >
+                      Register
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AddListing;

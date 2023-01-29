@@ -17,7 +17,7 @@ const Register = () => {
 
   const onchange = (e) => {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
-    // console.log(data);
+    console.log(data);
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -46,16 +46,16 @@ const Register = () => {
   // }
   return (
     <div className="container d-flex reg">
-      <div class="regform" style={{ position: "relative", width: "50%" }}>
+      <div className="regform" style={{ position: "relative", width: "50%" }}>
         <form>
           <div className="d-flex">
             {/* name of seller */}
-            <div class="mb-3 " style={{ width: "80%" }}>
+            <div className="mb-3 " style={{ width: "80%" }}>
               <input
                 style={{ fontSize: ".95rem" }}
                 name="name"
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 value={data.name}
                 onChange={onchange}
@@ -63,12 +63,12 @@ const Register = () => {
               />
             </div>
             {/* mobile no of seller */}
-            <div class="mb-3 " style={{ width: "80%" }}>
+            <div className="mb-3 " style={{ width: "80%" }}>
               <input
                 style={{ fontSize: ".95rem" }}
                 name="mobile"
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 value={data.mobile}
                 onChange={onchange}
@@ -78,12 +78,12 @@ const Register = () => {
             </div>
           </div>
           {/* email of seller */}
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               name="email"
               type="email"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               value={data.email}
               onChange={onchange}
@@ -93,11 +93,11 @@ const Register = () => {
           </div>
 
           {/* gst no of seller */}
-          <div class={`mb-3 ${d1}`}>
+          <div className={`mb-3 ${d1}`}>
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               name="gstin"
               value={data.gstin}
@@ -106,19 +106,19 @@ const Register = () => {
               aria-describedby="emailHelp"
             />
             <div style={{ fontSize: ".8rem" }}>
-              <label for="exampleInputEmail1" class="form-label">
+              <label for="exampleInputEmail1" className="form-label">
                 {" "}
                 GSTIN is required to sell products on Sellers
               </label>
             </div>
           </div>
           {/* bank account no of seller */}
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
               name="bank_account"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               value={data.bank_account}
               onChange={onchange}
@@ -127,12 +127,12 @@ const Register = () => {
             />
           </div>
           {/* bank ifsc code of seller */}
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               style={{ fontSize: ".95rem" }}
               type="text"
               name="bank_ifsc"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               value={data.bank_ifsc}
               onChange={onchange}
@@ -140,41 +140,41 @@ const Register = () => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div class="mb-1" style={{ fontSize: ".84rem" }}>
-            <label for="exampleInputEmail1" class="form-label">
+          <div className="mb-1" style={{ fontSize: ".84rem" }}>
+            <label for="exampleInputEmail1" className="form-label">
               By continuing, I agree to Sellers's Terms of Use & Privacy Policy
             </label>
           </div>
 
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
             Register to Continue
           </button>
           <div
-            class="modal fade"
+            className="modal fade"
             id="exampleModal"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
                     Create Password
                   </h5>
                   <button
                     type="button"
-                    class="btn-close"
+                    className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <div>
                     <div className="container my-3">
                       {/* password creation of seller */}
@@ -206,7 +206,7 @@ const Register = () => {
                           onChange={onchange}
                         />
                       </div>
-                      <div class="mb-1" style={{ fontSize: ".84rem" }}></div>
+                      <div className="mb-1" style={{ fontSize: ".84rem" }}></div>
 
                       {/* final register by seller */}
 
@@ -220,7 +220,7 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer"></div>
+                <div className="modal-footer"></div>
               </div>
             </div>
           </div>
@@ -228,10 +228,10 @@ const Register = () => {
       </div>
       <div></div>
       <div>
-        <div class="card mx-2 my-3" style={{ width: "350px" }}>
-          <img src="/images/img1.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <p class="card-text">Sell Online and Grow...</p>
+        <div className="card mx-2 my-3" style={{ width: "350px" }}>
+          <img src="/images/img1.jpg" className="card-img-top" alt="..." />
+          <div className="card-body">
+            <p className="card-text">Sell Online and Grow...</p>
           </div>
         </div>
       </div>

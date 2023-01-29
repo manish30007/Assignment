@@ -16,7 +16,7 @@ function App() {
       <Register/>
       {/* <Register2/> */}
       {/* <Home/> */}
-      {/* <AddListing/> */}
+      <AddListing/>
       {/* <Login/> */}
     </div>
   );
