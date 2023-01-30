@@ -36,14 +36,14 @@ exports.putUpdateProduct = (req, res) => {
     console.log("id: ", req.params.id);
     // console.log("body: ", req.body);
     Pro.findByIdAndUpdate(req.params.id,req.body)
-        .then((emp) => {
-            console.log("edit", { emp });
-            return res.json({ message: "updated successfully", emp });
+        .then((user) => {
+            console.log("edit", { user });
+            return res.json({ message: "updated successfully", user });
         })
         .catch((err) =>
             res
                 .status(400)
-                .json({ error: "unable to update emp", message: err.message })
+                .json({ error: "unable to update user", message: err.message })
         );
 };
 
@@ -52,10 +52,10 @@ exports.deleteProduct = (req, res) => {
   console.log('token',token,req.params.id);
     Pro.findByIdAndDelete(req.params.id, token)
     .then((data) =>
-        res.json({ message: "emp deleted successfully", data })
+        res.json({ message: "user deleted successfully", data })
     )
     .catch((err) =>
             res.status(400)
-            .json({ error: "unable to delete emp", message: err.message })
+            .json({ error: "unable to delete user", message: err.message })
         );
 };

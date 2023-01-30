@@ -20,7 +20,7 @@ const Login = () => {
     const handleClick=(e)=>{
       e.preventDefault();
       console.log("logindata ", logindata);
-      axios.post("http://localhost:8000/api/employee/login", logindata)
+      axios.post("http://localhost:8000/api/vendor/login", logindata)
         .then((res) => {
           localStorage.setItem("token",res.data.data._id );
           setCurrentName(res.data.data.name);

@@ -4,16 +4,16 @@ const router = express.Router();
 
 const {
 
-    postCreateEmp,
+    postCreateUser,
    
-    loginEmp,
+    loginUser,
  
 } = require("../controllers/user");
 
 
 
-router.post("/", postCreateEmp);
-router.post("/login", loginEmp);
+router.post("/", postCreateUser);
+router.post("/login", loginUser);
 
 
 

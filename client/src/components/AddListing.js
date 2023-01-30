@@ -84,7 +84,7 @@ console.log(pssi);
               className="card"
               style={{ width:"600px"}}
             >
-              <div className="card-header">Add Product Details</div>
+              <div className="card-header"><h2>Add Product Details</h2></div>
               <div className="card-body">
                 <div className="container">
                   <form>
