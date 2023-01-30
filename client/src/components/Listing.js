@@ -3,7 +3,10 @@ import axios from 'axios'
 import ProductItem   from "./ProductItem";
 import { useNavigate} from "react-router-dom";
 import { useStore } from "../store";
+import { useToaster,Message} from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 const Listing = () => {
+  const toaster = useToaster();
   const [prods, setProds]=useState([])
   let navigate = useNavigate();
   const currentId = useStore((state) => state.currentId);
@@ -105,7 +108,7 @@ const editProduct=async(prod)=>{
   console.log('thisiiit',prod)
 console.log(prod.id);
   axios
-  .put(`http://localhost:8000/api/product/${prod._id}`, prod)
+  .put(`http://localhost:8000/api/product/${prod.id}`, prod)
   // axios({
   //   url:`http://localhost:8000/api/product/${prod.id}`,
   //   method:"PUT",
@@ -116,6 +119,8 @@ console.log(prod.id);
    
   // })
   .then((res) => {
+    navigate("/home");
+   
       setProduct({  id:"",
       e_file:"",
       e_productcategory: "",
@@ -126,9 +131,20 @@ console.log(prod.id);
       e_packof: "",
       e_description: "",
       e_searchkeyword: "", });
+      toaster.push(
+        <Message type="success" closable>
+         Product Updated successfully
+        </Message>
+      );
+      
       console.log(res.data.message);
   })
   .catch((err) => {
+    toaster.push(
+      <Message type="error" closable>
+       Product  updation error
+      </Message>
+    );
       console.log("Failed to update Emp");
       console.log(err.message);
   });

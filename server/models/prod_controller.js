@@ -36,7 +36,6 @@ const create = async (arr) =>{
     await session.run(`CREATE (p:Product {
        
         _id : '${product_unique_id}',
-
         productcategory:'${prod.productcategory}',
         productname:'${prod.productname}',
         sellingprice:'${prod.sellingprice}',
@@ -50,16 +49,16 @@ const create = async (arr) =>{
     return await findById(product_unique_id)
 }
 const findByIdAndUpdate = async (id, prod) =>{
-    console.log(prod)
+    console.log(prod,id)
     const result = await session.run(`MATCH (p:Product {_id : '${id}'}) SET  
-    p.productcategory:'${prod.e_productcategory}',
-    p.productname:'${prod.e_productname}',
-    p.sellingprice:'${prod.e_sellingprice}',
-    p.stock:'${prod.e_stock}',
-    p.packof:'${prod.e_packof}',
-    p.delivercharge:'${prod.e_delivercharge}',
-    p.description:'${prod.e_description}',
-    p.searchkeyword:'${prod.e_searchkeyword}' return p`)
+    p.productcategory='${prod.e_productcategory}',
+    p.productname='${prod.e_productname}',
+    p.sellingprice='${prod.e_sellingprice}',
+    p.stock='${prod.e_stock}',
+    p.packof='${prod.e_packof}',
+    p.delivercharge='${prod.e_delivercharge}',
+    p.description='${prod.e_description}',
+    p.searchkeyword='${prod.e_searchkeyword}' return p`)
     return result.records[0].get('p').properties
 }
 const findByIdAndDelete = async (id,token) =>{
